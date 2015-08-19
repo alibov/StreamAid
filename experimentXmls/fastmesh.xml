@@ -1,0 +1,64 @@
+<experiment>
+	<name value="fastmesh" />
+	<playbackSeconds value="60" />
+	<runs value="1" />
+	<!-- <churnModel type="none" /> -->
+<!-- 	<churnModel type="sessionLengthInterArrival">
+		<sessionLengthDistribution>
+			<distribution type="LogNormalDistribution" mean="4.29"
+				variance="1.28" />
+		</sessionLengthDistribution>
+		<interArrivalDistribution>
+			<distribution type="InfiniteDistribution" />
+		</interArrivalDistribution>
+	</churnModel> -->
+<!-- 	
+	<churnModel type="sessionLengthOffLength">
+		<sessionLengthDistribution>
+			<distribution type="ExponentialDistribution" mean="20"/>
+		</sessionLengthDistribution>
+		<offLengthDistribution>
+			<distribution type="ExponentialDistribution" mean="5"/>
+		</offLengthDistribution>
+	</churnModel>-->
+	
+<!--  	<uploadBandwidthDistribution>
+		<distribution type="ConstantDistribution" value="5560000.0" />
+	</uploadBandwidthDistribution> 
+	<serverUploadBandwidth value="16680000" />-->
+	<!--
+	<churnModel type="eventBased">
+		<event type="addition" time="10" amount="20"/>
+	    <event type="departure" time="35" amount="25"/>
+	    <event type="addition" time="40" amount="20"/>
+	</churnModel>
+	-->
+<churnModel type="sessionLengthAddOnFailure">
+		<sessionLengthDistribution>
+			<distribution type="LogNormalDistribution" mean="4.29"
+				variance="1.28" />
+		</sessionLengthDistribution>
+	</churnModel> 
+ 	<bufferFromFirstChunk /> 
+	<serverStartup value="10000" />
+	<startupBuffering value="4000" />
+	
+	<uploadBandwidthDistribution>
+		<distribution type="UniformDistribution" min="56000000.0" max="556000000.0"/>
+	</uploadBandwidthDistribution> 
+	<serverUploadBandwidth value="1668000000000" />
+	<enableTextLogger/>
+	<messageHeaderSize value="64" />
+	<seed value="12345678" />
+	<descriptions value="5" />
+	<cycleLength value="1000" />
+	<framework value="PeerSimFramework" dropRate="0.0" />
+	<streamWindowSize value="120" />
+	<bitrate value="2000000" /> <!-- 500 kbps -->
+	<streamingAlgorithm algorithm="PushMultipleDescriptionTree" size="100">
+		<overlayAlgorithm groupSize="10"
+			algorithm="FastMeshOverlayAlgorithm">
+			<clusteringAlgorithm algorithm="FullCluster" />
+		</overlayAlgorithm>
+	</streamingAlgorithm>
+</experiment>

@@ -1,0 +1,33 @@
+<experiment>
+	<name value="btlive" />
+	<playbackSeconds value="60" />
+	<runs value="1" />
+	<serverUploadBandwidth value="1668000000000" />
+	<messageHeaderSize value="64" />
+	<seed value="12345678" />
+	<descriptions value="6" />
+	<cycleLength value="1000" />
+	<framework value="PeerSimFramework" dropRate="0.0"  />
+	<churnModel type="sessionLengthAddOnFailure">
+		<sessionLengthDistribution>
+			<distribution type="LogNormalDistribution" mean="5.29"
+				variance="1.28" />
+		</sessionLengthDistribution>
+	</churnModel>
+	<bitrate value="500000" /> <!-- 500 kbps -->
+
+
+	<playerModule waitIfNoChunk="true" bufferFromFirstChunk="true"
+		serverStartup="10000" startupBuffering="1000" streamWindowSize="120" />
+
+	<uploadBandwidthDistribution>
+		<distribution type="ConstantDistribution" value="556000000.0" />
+	</uploadBandwidthDistribution>
+
+	<streamingModule algorithm="PushMultipleSubstreamTree"
+		sendMissingChunks="true" size="100">
+		<overlayModule clubsForPeer="2"
+			algorithm="BittorrentLiveOverlay" minInClubDownload="2"
+			maxInClubDownload="3" parentDropTimeout="0" />
+	</streamingModule>
+</experiment>

@@ -1,0 +1,15 @@
+<experiment>
+	<name value="BSCAMP" />
+	<playbackSeconds value="300" />
+	<runs value="5" />
+  <churnModel type="sessionLengthAddOnFailure"> <sessionLengthDistribution> 
+		<distribution type="LogNormalDistribution" mean="4.29" variance="1.28" /> 
+		</sessionLengthDistribution> </churnModel> <!-- -->	
+	<streamWindowSize value="120" />
+	<bitrate value="300000" />
+	<bufferFromFirstChunk />
+	<seed value="123456" />
+	<streamingAlgorithm algorithm="CoolStreaming" size="100">
+		<overlayAlgorithm algorithm="BSCAMPOverlay" c="1"/>
+	</streamingAlgorithm>
+</experiment>

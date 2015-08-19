@@ -1,0 +1,23 @@
+<experiment>
+	<name value="expName" />
+	<runs value="1" />
+	<streamWindowSize value="120" />
+	<bitrate value="250000" /> <!-- 250 kbps -->
+	<churnModel type="availabilityFile">
+		<availabilityFile value="sopcast.avail" />
+	</churnModel>
+	<seed value="123456" />
+	<streamingAlgorithm algorithm="MtreeBone">
+		<streamingAlgorithm algorithm="PushTree">
+			<overlayAlgorithm algorithm="TreeBoneOverlay"
+				stableCoefficient="0.3" queryTimeout="3">
+				<clusteringAlgorithm algorithm="FullCluster" />
+			</overlayAlgorithm>
+		</streamingAlgorithm>
+		<overlayAlgorithm algorithm="AraneolaOverlay" S="12"
+			gossipDelay="6" amountToSend="3" L="3" H="10" connect_timeout="2"
+			disconnect_timeout="2">
+			<clusteringAlgorithm algorithm="FullCluster" />
+		</overlayAlgorithm>
+	</streamingAlgorithm>
+</experiment>

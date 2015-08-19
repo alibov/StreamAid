@@ -1,0 +1,41 @@
+<experiment>
+	<name value="csNew" />
+	<playbackSeconds value="300" />
+	<runs value="5" />
+	<!-- <churnModel type="none" /> -->
+	<!-- <churnModel type="sessionLengthInterArrival"> <sessionLengthDistribution> 
+		<distribution type="LogNormalDistribution" mean="4.29" variance="1.28" /> 
+		</sessionLengthDistribution> <interArrivalDistribution> <distribution type="InfiniteDistribution" 
+		/> </interArrivalDistribution> </churnModel> -->
+		
+  <!--  <churnModel type="sessionLengthAddOnFailure"> <sessionLengthDistribution> 
+		<distribution type="LogNormalDistribution" mean="4.29" variance="1.28" /> 
+		</sessionLengthDistribution> </churnModel>  -->	
+		
+		
+	<!--	<churnModel type="sessionLengthOffLength"> 
+		<sessionLengthDistribution> <distribution type="ExponentialDistribution" 
+		mean="20"/> </sessionLengthDistribution> <offLengthDistribution> <distribution 
+		type="ExponentialDistribution" mean="5"/> </offLengthDistribution> </churnModel> -->
+
+	<uploadBandwidthDistribution> <distribution type="ConstantDistribution" 
+		value="5560000.0" /> </uploadBandwidthDistribution> <serverUploadBandwidth 
+		value="16680000" />
+	<!-- <churnModel type="eventBased"> <event type="addition" time="10" amount="20"/> 
+		<event type="departure" time="35" amount="25"/> <event type="addition" time="40" 
+		amount="20"/> </churnModel> -->
+	<bufferFromFirstChunk />
+	<serverStartup value="10000" />
+
+	<messageHeaderSize value="64" />
+	<seed value="12345678" />
+	<descriptions value="1" />
+	<cycleLength value="1000" />
+	<framework value="PeerSimFramework" />
+	<streamWindowSize value="120" />
+	<bitrate value="500000" /> <!-- 500 kbps -->
+	<streamingAlgorithm algorithm="CoolStreaming" size="100">
+		<overlayAlgorithm wl="4" groupSize="8" minCapacity="1" minUploadBandwidth="5560000"
+			algorithm="SwapLinksOverlay"/>
+	</streamingAlgorithm>
+</experiment>

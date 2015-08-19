@@ -1,0 +1,37 @@
+<experiment>
+	<name value="DNVPMal2CoolstreamingBSCAMP" />
+	<playbackSeconds value="300" />
+	<runs value="2" />
+	<!-- <churnModel type="sessionLengthAddOnFailure">
+		<sessionLengthDistribution>
+			<distribution type="LogNormalDistribution" mean="4.29"
+				variance="1.28" />
+		</sessionLengthDistribution>
+	</churnModel>-->
+	<!--  churnModel type="sessionLengthInterArrival">
+		<sessionLengthDistribution>
+			<distribution type="LogNormalDistribution" mean="4.29"
+				variance="1.28" />
+		</sessionLengthDistribution>
+		<interArrivalDistribution>
+			<distribution type="ParetoDistribution" Xm="1.55" alpha="2.52" />
+		</interArrivalDistribution>
+	</churnModel> --> 
+	<streamWindowSize value="120" />
+	<bitrate value="300000" />
+	<seed value="123456" />
+	<streamingAlgorithm algorithm="CoolStreaming" size="500">
+		<overlayAlgorithm algorithm="BSCAMPOverlay" c="1">
+			<clusteringAlgorithm algorithm="FullCluster" />
+			<behavior name="DNVPOverlayBehavior" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
+			checkApproval="1.0" checkDisconnection="1.0" verificationsPerCycle = "2"/>
+		</overlayAlgorithm>
+	</streamingAlgorithm>
+	<streamingAlgorithm algorithm="CoolStreaming" size="100">
+		<overlayAlgorithm algorithm="BSCAMPOverlay" c="1">
+			<clusteringAlgorithm algorithm="FullCluster" />
+			<behavior name="Malicious2DNVPBehavior" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
+			checkApproval="1.0" checkDisconnection="1.0" verificationsPerCycle = "2"/>
+		</overlayAlgorithm>
+	</streamingAlgorithm>
+</experiment>

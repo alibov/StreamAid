@@ -1,0 +1,20 @@
+<experiment>
+	<name value="csM4S10" />
+	<playbackSeconds value="600" />
+	<runs value="1" />
+	<churnModel type="none" />
+	<startupBuffering value="10000" />
+	<serverStartup value="10000" />
+	<enableTextLogger /> 
+	<messageHeaderSize value="64" />
+	<seed value="12345678" />
+	<descriptions value="1" />
+	<cycleLength value="1000" />
+	<framework value="NetworkFramework" role="server" port="8010"/>
+	<streamWindowSize value="120" />
+	<bitrate value="500000" /> <!-- 500 kbps -->
+	<streamingAlgorithm algorithm="CoolStreaming" size="5">
+		<overlayAlgorithm H="100" M="4" c="1" amountToSend="6" exploreRound="30" gossipTimeout="6"
+			algorithm="CoolStreamingOverlay"/>
+	</streamingAlgorithm>
+</experiment>

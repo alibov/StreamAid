@@ -1,0 +1,52 @@
+<experiment>
+	<name value="csNew" />
+	<playbackSeconds value="300" />
+	 <!-- <debugSeed value = "3837292283627714042"></debugSeed>--> 
+	<runs value="1" />
+	<!-- <churnModel type="none" /> -->
+	<!-- <churnModel type="sessionLengthInterArrival"> <sessionLengthDistribution> 
+		<distribution type="LogNormalDistribution" mean="4.29" variance="1.28" /> 
+		</sessionLengthDistribution> <interArrivalDistribution> <distribution type="InfiniteDistribution" 
+		/> </interArrivalDistribution> </churnModel> -->
+
+	 <!-- <churnModel type="sessionLengthAddOnFailure">
+		<sessionLengthDistribution>
+			<distribution type="LogNormalDistribution" mean="4.29"
+				variance="1.28" />
+		</sessionLengthDistribution>
+	</churnModel>-->  
+
+
+	<!-- <churnModel type="sessionLengthOffLength"> <sessionLengthDistribution> 
+		<distribution type="ExponentialDistribution" mean="20"/> </sessionLengthDistribution> 
+		<offLengthDistribution> <distribution type="ExponentialDistribution" mean="5"/> 
+		</offLengthDistribution> </churnModel> -->
+<!-- <churnModel type="eventBased"> <event type="addition" time="10" amount="20"/> 
+		<event type="departure" time="35" amount="25"/> <event type="addition" time="40" 
+		amount="20"/> </churnModel> -->
+		
+		
+	<uploadBandwidthDistribution>
+		<distribution type="ConstantDistribution" value="5560000.0" />
+	</uploadBandwidthDistribution>
+	<serverUploadBandwidth value="16680000" />
+	
+	<bufferFromFirstChunk />
+	<serverStartup value="10000" />
+    <startupBuffering value="1000"/>
+    
+	<messageHeaderSize value="64" />
+	<seed value="12345678" />
+	<descriptions value="3" />
+	<cycleLength value="1000" />
+	<framework value="PeerSimFramework" />
+	<streamWindowSize value="120" />
+	<bitrate value="500000" /> <!-- 500 kbps -->
+	<streamingAlgorithm algorithm="PushMultipleDescriptionTree" size="100">
+		<overlayAlgorithm algorithm="ChunkySpread" maxLoad="11" churnDelay="4" startDelay="5" ULT="0.75" LLT="0.25" 
+		windowSize="10" fastPercentage="0.4" slowPercentage="0.4" highScore="6" lowScore="-6" noParentTimeout="1" pendingTimeout="2">
+			<overlayAlgorithm wl="6" groupSize="40" minCapacity="60" minUploadBandwidth="5560000"
+			algorithm="SwapLinksOverlay"/>
+			</overlayAlgorithm>
+	</streamingAlgorithm>
+</experiment>

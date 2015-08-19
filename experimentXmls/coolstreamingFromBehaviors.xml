@@ -1,0 +1,82 @@
+<experiment>
+	<name value="coolstreamingIngredients" />
+	<seed value="12345678" />
+	<playbackSeconds value="60" />
+	<runs value="1" />
+	<serverUploadBandwidth value="10000000" />
+	<enableTextLogger/>
+	
+	<!-- 
+	<uploadBandwidthDistribution>
+		<distribution type="ConstantDistribution" value="3100000" />
+		</uploadBandwidthDistribution>
+		-->
+<!-- 	<uploadBandwidthDistribution>
+		<distribution type="UniformDistribution" min="1600000" max="3100000" />
+	</uploadBandwidthDistribution> -->
+
+	<uploadBandwidthDistribution>
+		<distribution type="NormalDistribution" mean="2600000" variance="1000000" />
+	</uploadBandwidthDistribution>
+
+	<messageHeaderSize value="64" />
+
+	<cycleLength value="1000" />
+	<framework value="PeerSimFramework" dropRate="0.0" />
+	
+	<!-- 
+	<churnModel type="availabilityFile">
+		<availabilityFile value="experimentXmls/sopcast.avail" />
+	</churnModel>
+	-->
+	
+ 	 <churnModel type="sessionLengthAddOnFailure">
+		<sessionLengthDistribution>
+			<distribution type="LogNormalDistribution" mean="3.29"
+				variance="1.28" />
+		</sessionLengthDistribution>
+	</churnModel>
+	
+	<bitrate value="500000" /> <!-- 500 kbps -->
+
+
+  	<playerModule waitIfNoChunk="" bufferFromFirstChunk="true"
+		serverStartup="10000" startupBuffering="2000" streamWindowSize="120" />  
+<!-- 		
+		<playerModule  bufferFromFirstChunk="true"
+		serverStartup="10000" startupBuffering="2000" streamWindowSize="120" /> 
+		
+		<overlayModule H="10" L="4" S="12" algorithm="Araneola"
+				amountToSend="3" connect_timeout="2" disconnect_timeout="2"
+				gossipDelay="6">
+				<ingredient name="NeighborChunkAvailabilityIngredient" operationMode="updateEveryRound"/> 
+			</overlayModule>--> 
+
+		<streamingModule algorithm="PullAlgorithm" size="100">
+			<overlayModule H="200" M="10" c="1" amountToSend="3" exploreRound="30" gossipTimeout="6"
+			algorithm="CoolStreamingOverlay">
+				<ingredient name="NeighborChunkAvailabilityIngredient" operationMode="updateEveryRound"/> 
+			</overlayModule>
+		<ingredient name="SourcePushIngredient"/>  
+		<ingredient name="EarliestContinuousChunkVSInitIngredient" maxOffset="0"/>  
+		<ingredient name="HandleChunkRequestsOnArrivalIngredient"/>
+
+<!--     	<ingredient name="ChunkRequestAlgoSwitchIngredient" timeout="20">
+ 			<ingredient name="CoolstreamingChunkRequestIngredient"/> 
+   			<ingredient name="ChainsawChunkRequestIngredient"/> 
+			<banditsAlgo name="UCB1">
+				<banditReward name="ChunksReceivedReward"/>
+			</banditsAlgo>
+		</ingredient> -->         
+
+    		<ingredient name="CoolstreamingChunkRequestIngredient"/>        
+<!--		<ingredient name="ChainsawChunkRequestIngredient"/> -->
+		
+		
+		<ingredient name="ChunkChoiceMeasurement"/>
+		
+		 
+
+    
+		</streamingModule>
+</experiment>

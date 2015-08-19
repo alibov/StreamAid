@@ -1,0 +1,50 @@
+<experiment>
+	<name value="coolstreaming" />
+	<seed value="12345678" />
+	<playbackSeconds value="600" />
+	<runs value="5" />
+	<serverUploadBandwidth value="10000000" />
+	
+	<!-- 
+	<uploadBandwidthDistribution>
+		<distribution type="ConstantDistribution" value="3100000" />
+		</uploadBandwidthDistribution>
+		-->
+	<uploadBandwidthDistribution>
+		<distribution type="UniformDistribution" min="1600000" max="3100000" />
+	</uploadBandwidthDistribution>
+
+	<messageHeaderSize value="64" />
+
+	<cycleLength value="1000" />
+	<framework value="PeerSimFramework" dropRate="0.0" />
+	
+	<!-- 
+	<churnModel type="availabilityFile">
+		<availabilityFile value="experimentXmls/sopcast.avail" />
+	</churnModel>
+	-->
+	
+ 	 <churnModel type="sessionLengthAddOnFailure">
+		<sessionLengthDistribution>
+			<distribution type="LogNormalDistribution" mean="3.29"
+				variance="1.28" />
+		</sessionLengthDistribution>
+	</churnModel>
+	
+	<bitrate value="500000" /> <!-- 500 kbps -->
+
+
+  	<playerModule waitIfNoChunk="" bufferFromFirstChunk="true"
+		serverStartup="10000" startupBuffering="2000" streamWindowSize="120" />  
+<!-- 		
+		<playerModule  bufferFromFirstChunk="true"
+		serverStartup="10000" startupBuffering="2000" streamWindowSize="120" /> --> 
+
+		<streamingModule algorithm="CoolStreaming"
+			maxInitOffset="0" maxInitLatency="100" sourcePush="true" size="100">
+			<overlayModule H="10" L="4" S="12" algorithm="Araneola"
+				amountToSend="3" connect_timeout="2" disconnect_timeout="2"
+				gossipDelay="6" />
+		</streamingModule>
+</experiment>

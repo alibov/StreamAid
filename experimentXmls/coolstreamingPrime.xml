@@ -1,0 +1,22 @@
+<experiment>
+	<name value="expName" />
+	<playbackSeconds value="40" />
+	<runs value="1" />
+	<churnModel type="sessionLengthInterArrival">
+		<sessionLengthDistribution>
+			<distribution type="LogNormalDistribution" mean="4.29"
+				variance="1.28" />
+		</sessionLengthDistribution>
+		<interArrivalDistribution>
+			<distribution type="ParetoDistribution" Xm="1.55" alpha="2.52" />
+		</interArrivalDistribution>
+	</churnModel>
+	<streamWindowSize value="120" />
+	<bitrate value="300000" />
+	<seed value="123456" />
+	<streamingAlgorithm algorithm="CoolStreaming" size = "50">
+		<overlayAlgorithm algorithm="PrimeOverlay" size="8">
+			<clusteringAlgorithm algorithm="FullCluster" />
+		</overlayAlgorithm>
+	</streamingAlgorithm>
+</experiment>

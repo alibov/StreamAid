@@ -1,0 +1,21 @@
+<experiment>
+	<name value="AspectsAraneola1" />
+	<playbackSeconds value="600" />
+	<runs value="1" />
+	<streamWindowSize value="120" />
+	<bitrate value="300000" />
+	<startupBuffering value="5000" />
+	<seed value="123456" />
+	<streamingAlgorithm algorithm="CoolStreaming" size="375">
+	   <overlayAlgorithm algorithm="AraneolaOverlay" S="12" gossipDelay="6" 
+		        amountToSend="3" L="4" H="6" connect_timeout="2" disconnect_timeout="2">
+		        <clusteringAlgorithm algorithm="FullCluster" />
+		</overlayAlgorithm>      
+	</streamingAlgorithm>
+ 	<streamingAlgorithm algorithm="CoolStreaming" size="125">
+		<overlayAlgorithm algorithm="AraneolaOverlay" S="12" gossipDelay="6" 
+		        amountToSend="3" L="4" H="6" connect_timeout="2" disconnect_timeout="2">
+		        <clusteringAlgorithm algorithm="FullCluster" />
+	 	</overlayAlgorithm> 
+ 	</streamingAlgorithm> 
+</experiment>

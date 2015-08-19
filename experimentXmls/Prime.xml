@@ -1,0 +1,32 @@
+<experiment>
+	<name value="expName" />
+	<playbackSeconds value="250" />
+	<runs value="1" />
+	<!--  <churnModel type="sessionLengthInterArrival">
+		<sessionLengthDistribution>
+			<distribution type="LogNormalDistribution" mean="4.29"
+				variance="1.28" />
+		</sessionLengthDistribution>
+		<interArrivalDistribution>
+			<distribution type="ParetoDistribution" Xm="1.55" alpha="2.52" />
+		</interArrivalDistribution>
+	</churnModel>  -->
+	<churnModel type="sessionLengthAddOnFailure">
+    <sessionLengthDistribution>
+        <distribution type="LogNormalDistribution" mean="4.29" variance="1.28" />
+    </sessionLengthDistribution>
+	</churnModel>
+	<!-- <startupBuffering value="0" /> -->
+	<!--  <serverStartup value ="0" />--> 
+	<streamWindowSize value="120" />
+	<bitrate value="300000" />
+	<descriptions value="10"/>
+	<seed value="123456" />
+	<!-- <enableTextLogger /> -->
+	<skipIfNoChunk />
+	<streamingAlgorithm algorithm="PrimeAlgorithm" size = "250">
+		<overlayAlgorithm algorithm="PrimeOverlay" size="10">
+			<clusteringAlgorithm algorithm="FullCluster" />
+		</overlayAlgorithm>
+	</streamingAlgorithm>
+</experiment>
