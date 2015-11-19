@@ -1,6 +1,6 @@
 <experiment>
 	<name value="pushpull" />
-	<playbackSeconds value="600" />
+	<playbackSeconds value="30" />
 	<runs value="1" />
 	<serverUploadBandwidth value="10000000" />
 	<uploadBandwidthDistribution>

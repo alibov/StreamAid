@@ -1,44 +1,28 @@
 <experiment>
 	<name value="AspectsAraneola" />
-	<playbackSeconds value="600" />
+	<playbackSeconds value="30" />
 	<runs value="1" />
-	<!--<churnModel type="sessionLengthAddOnFailure">
-		<sessionLengthDistribution>
-			<distribution type="LogNormalDistribution" mean="4.29"
-				variance="1.28" />
-		</sessionLengthDistribution>
-	</churnModel>-->
-	<!--  <debugSeed value="4653291594555506559" /> -->
-	<!--     <churnModel type="sessionLengthInterArrival">
-		<sessionLengthDistribution>
-			<distribution type="LogNormalDistribution" mean="4.29"
-				variance="1.28" />
-		</sessionLengthDistribution>
-		<interArrivalDistribution>
-			<distribution type="ParetoDistribution" Xm="1.55" alpha="2.52" />
-		</interArrivalDistribution>
-	</churnModel> -->
-	<streamWindowSize value="120" />
+
+	<playerModule waitIfNoChunk="" bufferFromFirstChunk="true"
+		serverStartup="10000" startupBuffering="2000" streamWindowSize="120" />
+
 	<bitrate value="300000" />
 	<seed value="123456" />
-	<streamingAlgorithm algorithm="CoolStreaming" size="200">
-	   <overlayAlgorithm algorithm="AraneolaOverlay" S="12" gossipDelay="6" 
+	<streamingModule algorithm="CoolStreaming" size="200">
+	   <overlayModule algorithm="Araneola" S="12" gossipDelay="6" 
 		        amountToSend="3" L="4" H="6" connect_timeout="2" disconnect_timeout="2">
-		        <clusteringAlgorithm algorithm="FullCluster" />
- 				<behavior name="DNVPOverlayBehavior" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
+ 				<ingredient name="DNVPOverlayIngredient" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
 				checkApproval="1.0" checkDisconnection="1.0" verificationsPerCycle = "2"/>
-		 		<behavior name="BlackListBehavior"/>  
-		</overlayAlgorithm> 
- 		<!-- <behavior name = "OmissionDefenceBehavior" numOfCycles="10" thresholdForMisses="1" roundsForDiffusion="3" roundsForAnswer="1" thresholdForCommittee="0.5"/> -->     
-	</streamingAlgorithm>
- 	<streamingAlgorithm algorithm="CoolStreaming" size="50">
-		<overlayAlgorithm algorithm="AraneolaOverlay" S="12" gossipDelay="6" 
+		 		<ingredient name="BlackListIngredient"/>  
+		</overlayModule> 
+ 		<!-- <ingredient name = "OmissionDefenceIngredient" numOfCycles="10" thresholdForMisses="1" roundsForDiffusion="3" roundsForAnswer="1" thresholdForCommittee="0.5"/> -->     
+	</streamingModule>
+ 	<streamingModule algorithm="CoolStreaming" size="50">
+		<overlayModule algorithm="Araneola" S="12" gossipDelay="6" 
 		        amountToSend="3" L="4" H="6" connect_timeout="2" disconnect_timeout="2">
-		        <clusteringAlgorithm algorithm="FullCluster" />
-			<behavior name="DNVPOverlayBehavior" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
+			<ingredient name="DNVPOverlayIngredient" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
 			checkApproval="1.0" checkDisconnection="1.0" verificationsPerCycle = "2"/>		 
-	 	</overlayAlgorithm> 
-	 	 <!--  <behavior name = "OmissionDefenceBehavior" numOfCycles="10" thresholdForMisses="1" roundsForDiffusion="3" roundsForAnswer="1" thresholdForCommittee="0.5"/>-->     
-   	    <behavior name="OmissionAttackBehavior"/>   
- 	</streamingAlgorithm> 
+	 	</overlayModule> 
+	 	 <!--  <ingredient name = "OmissionDefenceIngredient" numOfCycles="10" thresholdForMisses="1" roundsForDiffusion="3" roundsForAnswer="1" thresholdForCommittee="0.5"/>-->        
+ 	</streamingModule> 
 </experiment>

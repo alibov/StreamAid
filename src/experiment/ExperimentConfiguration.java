@@ -89,19 +89,19 @@ public class ExperimentConfiguration implements Serializable {
   public final P2PFramework framework;
   public final boolean sendPartialMessage;
   private final Integer groupStartingNumber;
-  private static String defaultName = "defaultExperiment";
-  private static boolean defaultEnableTextLogger = false;
-  private static boolean defaultWaitQueueLimit = false;
-  private static int defaultRuns = 1;
-  private static Integer defaultAlgStartingNumber = 0;
-  private static int defaultBitRate = 200;
-  private static int defaultPlaybackSeconds = 250;
-  private static int defaultHeaderSize = 64;
-  private static long defaultServerBandwidth = Long.MAX_VALUE;
-  private static int defaultDesctiptions = 1;
-  private static long defaultCycleLength = 1000;
-  private static P2PFramework defaultFramework = new PeerSimFramework(0.0, 200, 400);
-  private static FailureDetector defaultFailureDetector = new PingMessageFailureDetector();
+  private static String defaultName;
+  private static boolean defaultEnableTextLogger;
+  private static boolean defaultWaitQueueLimit;
+  private static int defaultRuns;
+  private static Integer defaultAlgStartingNumber;
+  private static int defaultBitRate;
+  private static int defaultPlaybackSeconds;
+  private static int defaultHeaderSize;
+  private static long defaultServerBandwidth;
+  private static int defaultDesctiptions;
+  private static long defaultCycleLength;
+  private static P2PFramework defaultFramework;
+  private static FailureDetector defaultFailureDetector;
   public static boolean defaultSendPartialMessage;
   ArrayList<GetStreamingMod> getStreamingMod = new ArrayList<ExperimentConfiguration.GetStreamingMod>();
   GetPlayerMod getPlayerMod;
@@ -109,12 +109,32 @@ public class ExperimentConfiguration implements Serializable {
   ArrayList<String> streamingAlgorithmXml = new ArrayList<String>();
   // no churn by default
   String uniqueName = Thread.currentThread().getId() + "t" + String.valueOf(new Date().getTime());
-  private static ChurnModel defaultChurnModel = new ChurnModel(Type.none);
+  private static ChurnModel defaultChurnModel;
   // mean data taken from netindex.com upload index
   // private static Distribution defaultUploadBandwidthDistribution = new
   // ConstantDistribution(5560000);
   private static Distribution defaultUploadBandwidthDistribution = new InfiniteDistribution();
   public List<Long> seeds = new LinkedList<Long>();
+  static {
+    initDefaults();
+  }
+  
+  public static void initDefaults() {
+    defaultChurnModel = new ChurnModel(Type.none);
+    defaultFailureDetector = new PingMessageFailureDetector();
+    defaultFramework = new PeerSimFramework(0.0, 200, 400);
+    defaultCycleLength = 1000;
+    defaultDesctiptions = 1;
+    defaultServerBandwidth = Long.MAX_VALUE;
+    defaultHeaderSize = 64;
+    defaultPlaybackSeconds = 250;
+    defaultBitRate = 200;
+    defaultAlgStartingNumber = 0;
+    defaultEnableTextLogger = false;
+    defaultWaitQueueLimit = false;
+    defaultName = "defaultExperiment";
+    defaultRuns = 1;
+  }
   
   public ExperimentConfiguration(final Document doc) throws IOException {
     final NodeList list = doc.getFirstChild().getChildNodes();
@@ -324,8 +344,7 @@ public class ExperimentConfiguration implements Serializable {
       InetSocketAddress address = null;
       if (role.equals(Role.server)) {
         address = new InetSocketAddress(InetAddress.getLocalHost(), port);
-      }
-      if (n.hasChildNodes()) {
+      } else if (n.hasChildNodes()) {
         address = getAddress(getNamedChildren(n, "address").get(0));
       }
       if (address == null) {

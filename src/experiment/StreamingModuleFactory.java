@@ -3,7 +3,7 @@ package experiment;
 import ingredients.AbstractIngredient;
 import ingredients.DNVP.DNVPOverlayIngredient;
 import ingredients.DNVP.Malicious1DNVPIngredient;
-import ingredients.DNVP.Malicious2DNVPIngredinet;
+import ingredients.DNVP.Malicious2DNVPIngredient;
 import ingredients.omission.OmissionDefenceIngredient;
 import ingredients.omission.OmissionDefenceIngredient2;
 import ingredients.overlay.NeighborChunkAvailabilityIngredient;
@@ -628,7 +628,7 @@ public class StreamingModuleFactory {
           .getValue());
       ncl.addIngredient(retVal = new Malicious1DNVPIngredient(timeoutcycle, expirationInterval, numOfNoncesToProduce,
           checkApproval, checkDisconnection, verificationsPerCycle, new Random(r.nextLong())), client);
-    } else if (name.equals(Malicious2DNVPIngredinet.class.getSimpleName())) {
+    } else if (name.equals(Malicious2DNVPIngredient.class.getSimpleName())) {
       final int timeoutcycle = Integer.parseInt(((Attr) n.getAttributes().getNamedItem("timeoutcycle")).getValue());
       final int expirationInterval = Integer.parseInt(((Attr) n.getAttributes().getNamedItem("expirationInterval")).getValue());
       final int numOfNoncesToProduce = Integer.parseInt(((Attr) n.getAttributes().getNamedItem("numOfNoncesToProduce")).getValue());
@@ -637,7 +637,7 @@ public class StreamingModuleFactory {
           .parseDouble(((Attr) n.getAttributes().getNamedItem("checkDisconnection")).getValue());
       final int verificationsPerCycle = Integer.parseInt(((Attr) n.getAttributes().getNamedItem("verificationsPerCycle"))
           .getValue());
-      ncl.addIngredient(retVal = new Malicious2DNVPIngredinet(timeoutcycle, expirationInterval, numOfNoncesToProduce,
+      ncl.addIngredient(retVal = new Malicious2DNVPIngredient(timeoutcycle, expirationInterval, numOfNoncesToProduce,
           checkApproval, checkDisconnection, verificationsPerCycle, new Random(r.nextLong())), client);
     } else if (name.equals(OmissionDefenceIngredient.class.getSimpleName())) {
       final int numOfCycles = Integer.parseInt(((Attr) n.getAttributes().getNamedItem("numOfCycles")).getValue());

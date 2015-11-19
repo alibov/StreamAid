@@ -1,15 +1,21 @@
 <experiment>
 	<name value="BSCAMP" />
-	<playbackSeconds value="300" />
-	<runs value="5" />
-  <churnModel type="sessionLengthAddOnFailure"> <sessionLengthDistribution> 
-		<distribution type="LogNormalDistribution" mean="4.29" variance="1.28" /> 
-		</sessionLengthDistribution> </churnModel> <!-- -->	
-	<streamWindowSize value="120" />
+	<playbackSeconds value="30" />
+	<runs value="1" />
+	<churnModel type="sessionLengthAddOnFailure">
+		<sessionLengthDistribution>
+			<distribution type="LogNormalDistribution" mean="4.29"
+				variance="1.28" />
+		</sessionLengthDistribution>
+	</churnModel> 
+
 	<bitrate value="300000" />
-	<bufferFromFirstChunk />
+
+	<playerModule waitIfNoChunk="" bufferFromFirstChunk="true"
+		serverStartup="10000" startupBuffering="3000" streamWindowSize="120" />
+
 	<seed value="123456" />
-	<streamingAlgorithm algorithm="CoolStreaming" size="100">
-		<overlayAlgorithm algorithm="BSCAMPOverlay" c="1"/>
-	</streamingAlgorithm>
+	<streamingModule algorithm="CoolStreaming" size="100">
+		<overlayModule algorithm="BSCAMP" c="1" />
+	</streamingModule>
 </experiment>

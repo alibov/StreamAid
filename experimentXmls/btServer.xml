@@ -1,10 +1,10 @@
 <experiment>
 	<name value="btserver" />
-	<playbackSeconds value="60" />
+	<playbackSeconds value="30" />
 	<runs value="1" />
 	<churnModel type="none" />
-	<startupBuffering value="2000" />
-	<serverStartup value="10000" />
+
+	
 <!-- 	<enableTextLogger /> --> 
 	<messageHeaderSize value="64" />
 	<!-- 
@@ -14,16 +14,18 @@
 				variance="1.28" />
 		</sessionLengthDistribution>
 	</churnModel> -->
-	<bufferFromFirstChunk />
+	<playerModule bufferFromFirstChunk="true"
+	serverStartup="10000" startupBuffering="2000" streamWindowSize="120" />
+	
 	<seed value="12345678" />
 	<descriptions value="6" />
 	<cycleLength value="1000" />
 <!-- 	<framework value="NetworkFramework" role="server" port="8010"/>  -->
 	<framework value="PeerSimFramework" dropRate="0.0" minDelay="200" maxDelay="400"  />
-	<streamWindowSize value="120" />
+	
 	<bitrate value="500000" /> <!-- 500 kbps -->
-	<streamingAlgorithm algorithm="PushMultipleSubstreamTree" sendMissingChunks="true" size="200">
-		<overlayAlgorithm clubsForPeer="2" algorithm="BittorrentLiveOverlay" minInClubDownload="2" maxInClubDownload="3" fatherDropTimeout="2"/>
-		<behavior name="WaitThenSkipPolicyBehavior" waitPeriod="2"/>
-	</streamingAlgorithm>
+	<streamingModule algorithm="PushMultipleSubstreamTree" sendMissingChunks="true" size="200">
+		<overlayModule clubsForPeer="2" algorithm="BittorrentLiveOverlay" minInClubDownload="2" maxInClubDownload="3" parentDropTimeout="2"/>
+		<ingredient name="WaitThenSkipPolicyIngredient" waitPeriod="2"/>
+	</streamingModule>
 </experiment>

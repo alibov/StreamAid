@@ -1,7 +1,7 @@
 <experiment>
 	<name value="OmissionExperiments"/>
-	<playbackSeconds value="1000"/>
-	<runs value="3"/>
+	<playbackSeconds value="30"/>
+	<runs value="1"/>
 	<!--  <uploadBandwidthDistribution>
 		<distribution type="ConstantDistribution" value="6000000.0"/>
 	</uploadBandwidthDistribution>-->
@@ -10,34 +10,30 @@
 	<seed value="12345679"/>
 	<descriptions value="1"/>
 	<cycleLength value="1000"/>
-	<churnModel type="none">
-	</churnModel>
-	<skipIfNoChunk />
-	<startupBuffering value="10000"/>
-	<serverStartup value="10000"/>
-	<streamWindowSize value="120"/>
+	<churnModel type="none" />
+	<playerModule bufferFromFirstChunk="true"
+	serverStartup="10000" startupBuffering="10000" streamWindowSize="120" />
+
 	<framework value="PeerSimFramework" dropRate="0.000" minDelay="200" maxDelay="400" />
 	<bitrate value="674000"/> <!-- 674 Kbps --> 
-	<streamingAlgorithm algorithm="CoolStreaming" size="113">
-		<overlayAlgorithm H="10" L="4" S="12" algorithm="AraneolaOverlay" amountToSend="3" connect_timeout="2" disconnect_timeout="2" gossipDelay="6">
-			<clusteringAlgorithm algorithm="FullCluster"/>
-			<behavior name="DNVPOverlayBehavior" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
+	<streamingModule algorithm="CoolStreaming" size="113">
+		<overlayModule H="10" L="4" S="12" algorithm="Araneola" amountToSend="3" connect_timeout="2" disconnect_timeout="2" gossipDelay="6">
+			<ingredient name="DNVPOverlayIngredient" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
 			checkApproval="1.0" checkDisconnection="1.0" verificationsPerCycle = "2"/>
-		   	<behavior name="BlackListBehavior"/>
-		 	<behavior name="AuditingBehavior" thresholdForSource="5" thresholdForCommittee="1"/>
-		</overlayAlgorithm>
-		<behavior name = "OmissionDefenceBehavior2" numOfCycles="10" thresholdForMisses="1" roundsForBitmap="2" roundsForAnswer="1" verificationsPerCycle="2"/>      
-	</streamingAlgorithm>
-	<streamingAlgorithm algorithm="CoolStreaming" size="37">
-		<overlayAlgorithm H="10" L="4" S="12" algorithm="AraneolaOverlay" amountToSend="3" connect_timeout="2" disconnect_timeout="2" gossipDelay="6">
-			<clusteringAlgorithm algorithm="FullCluster"/>
-			<behavior name="DNVPOverlayBehavior" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
+		   	<ingredient name="BlackListIngredient"/>
+		 	<ingredient name="DNVPAuditingIngredient" thresholdForSource="5" thresholdForCommittee="1"/>
+		</overlayModule>
+		<ingredient name = "OmissionDefenceIngredient2" numOfCycles="10" thresholdForMisses="1" roundsForBitmap="2" roundsForAnswer="1" verificationsPerCycle="2"/>      
+	</streamingModule>
+	<streamingModule algorithm="CoolStreaming" size="37">
+		<overlayModule H="10" L="4" S="12" algorithm="Araneola" amountToSend="3" connect_timeout="2" disconnect_timeout="2" gossipDelay="6">
+			<ingredient name="DNVPOverlayIngredient" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
 			checkApproval="1.0" checkDisconnection="1.0" verificationsPerCycle = "2"/>
-			<behavior name="BlackListBehavior"/>
-		 	<behavior name="AuditingBehavior" thresholdForSource="5" thresholdForCommittee="1"/>
-		</overlayAlgorithm>
-		<behavior name = "OmissionDefenceBehavior2" numOfCycles="10" thresholdForMisses="1" roundsForBitmap="2" roundsForAnswer="1" verificationsPerCycle="2"/>
-		<!--  <behavior name="ChunksOmissionBehavior" dropRate="1"/>-->
-		<behavior name="BitmapOmissionBehavior" dropRate="1"/>
-	</streamingAlgorithm>
+			<ingredient name="BlackListIngredient"/>
+		 	<ingredient name="DNVPAuditingIngredient" thresholdForSource="5" thresholdForCommittee="1"/>
+		</overlayModule>
+		<ingredient name = "OmissionDefenceIngredient2" numOfCycles="10" thresholdForMisses="1" roundsForBitmap="2" roundsForAnswer="1" verificationsPerCycle="2"/>
+		<!--  <ingredient name="ChunksOmissionIngredient" dropRate="1"/>-->
+		<!--<ingredient name="BitmapOmissionIngredient" dropRate="1"/> -->
+	</streamingModule>
 </experiment>

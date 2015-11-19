@@ -1,6 +1,6 @@
 <experiment>
 	<name value="expName" />
-	<playbackSeconds value="250" />
+	<playbackSeconds value="30" />
 	<runs value="1" />
 	<!--  <churnModel type="sessionLengthInterArrival">
 		<sessionLengthDistribution>
@@ -18,15 +18,13 @@
 	</churnModel>
 	<!-- <startupBuffering value="0" /> -->
 	<!--  <serverStartup value ="0" />--> 
-	<streamWindowSize value="120" />
+	<playerModule  bufferFromFirstChunk="true"
+	serverStartup="10000" startupBuffering="4000" streamWindowSize="120" />
 	<bitrate value="300000" />
 	<descriptions value="10"/>
 	<seed value="123456" />
 	<!-- <enableTextLogger /> -->
-	<skipIfNoChunk />
-	<streamingAlgorithm algorithm="PrimeAlgorithm" size = "250">
-		<overlayAlgorithm algorithm="PrimeOverlay" size="10">
-			<clusteringAlgorithm algorithm="FullCluster" />
-		</overlayAlgorithm>
-	</streamingAlgorithm>
+	<streamingModule algorithm="PrimeStreaming" size = "250">
+		<overlayModule algorithm="PrimeOverlay" size="10" />
+	</streamingModule>
 </experiment>

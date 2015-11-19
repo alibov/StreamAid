@@ -1,6 +1,6 @@
 <experiment>
 	<name value="fastmesh" />
-	<playbackSeconds value="60" />
+	<playbackSeconds value="30" />
 	<runs value="1" />
 	<!-- <churnModel type="none" /> -->
 <!-- 	<churnModel type="sessionLengthInterArrival">
@@ -39,9 +39,9 @@
 				variance="1.28" />
 		</sessionLengthDistribution>
 	</churnModel> 
- 	<bufferFromFirstChunk /> 
-	<serverStartup value="10000" />
-	<startupBuffering value="4000" />
+	
+	<playerModule waitIfNoChunk="" bufferFromFirstChunk="true"
+	serverStartup="10000" startupBuffering="4000" streamWindowSize="120" />
 	
 	<uploadBandwidthDistribution>
 		<distribution type="UniformDistribution" min="56000000.0" max="556000000.0"/>
@@ -53,12 +53,8 @@
 	<descriptions value="5" />
 	<cycleLength value="1000" />
 	<framework value="PeerSimFramework" dropRate="0.0" />
-	<streamWindowSize value="120" />
 	<bitrate value="2000000" /> <!-- 500 kbps -->
-	<streamingAlgorithm algorithm="PushMultipleDescriptionTree" size="100">
-		<overlayAlgorithm groupSize="10"
-			algorithm="FastMeshOverlayAlgorithm">
-			<clusteringAlgorithm algorithm="FullCluster" />
-		</overlayAlgorithm>
-	</streamingAlgorithm>
+	<streamingModule algorithm="PushMultipleDescriptionTree" size="100">
+		<overlayModule groupSize="10" algorithm="FastMeshOverlay" TTL="2" TEBA="3" TTWFG="3"/>
+	</streamingModule>
 </experiment>

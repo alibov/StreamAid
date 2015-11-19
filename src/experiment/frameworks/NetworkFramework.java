@@ -146,8 +146,11 @@ public class NetworkFramework implements P2PFramework {
   
   @Override public String toXml(final String prefix) {
     final StringBuilder sb = new StringBuilder();
-    sb.append(prefix + "<framework value=\"" + getClass().getSimpleName() + "\" role=\"" + role + "\" port=\"" + port + "\" >");
-    sb.append(prefix + "\t<address  hostname=\"" + serverAddress.getHostName() + "\" port=\"" + serverAddress.getPort() + "\" >");
+    sb.append(prefix + "<framework value=\"" + getClass().getSimpleName() + "\" role=\"" + role.toString() + "\" port=\"" + port
+        + "\" >");
+    if (role.equals(Role.client)) {
+      sb.append(prefix + "\t<address  hostname=\"" + serverAddress.getHostName() + "\" port=\"" + serverAddress.getPort() + "\" >");
+    }
     sb.append(prefix + "</framework>");
     return sb.toString();
   }

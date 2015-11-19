@@ -1,6 +1,6 @@
 <experiment>
 	<name value="SkipPolicy"/>
-	<playbackSeconds value="300"/>
+	<playbackSeconds value="30"/>
 	<runs value="1"/>
 	<uploadBandwidthDistribution>
 		<distribution type="ConstantDistribution" value="5560000.0"/>
@@ -16,14 +16,13 @@
 				variance="1.28" />
 		</sessionLengthDistribution>
 	</churnModel> 
-	<bufferFromFirstChunk />
-	<startupBuffering value="4000"/>
-	<serverStartup value="10000"/>
-	<streamWindowSize value="120"/>
+	<playerModule bufferFromFirstChunk="true"
+	serverStartup="10000" startupBuffering="4000" streamWindowSize="120" /> 
+	
 	<framework value="PeerSimFramework" dropRate="0.0" minDelay="200" maxDelay="400"  />
 	<bitrate value="300000"/> <!-- 300 kbps -->
-		<streamingAlgorithm algorithm="CoolStreaming" serverPush="true" maxInitOffset="1" size="200">
-		 	<overlayAlgorithm H="8" L="4" S="12" algorithm="AraneolaOverlay" amountToSend="3" connect_timeout="2" disconnect_timeout="2" gossipDelay="6"/>
-		  	<behavior name="LookaheadSkipPolicyBehavior" numberOfLookaheadChunks="0"/>   
-		</streamingAlgorithm>
+		<streamingModule algorithm="CoolStreaming" serverPush="true" maxInitOffset="1" size="200">
+		 	<overlayModule H="8" L="4" S="12" algorithm="Araneola" amountToSend="3" connect_timeout="2" disconnect_timeout="2" gossipDelay="6"/>
+		  	<ingredient name="LookaheadSkipPolicyIngredient" numberOfLookaheadChunks="0"/>   
+		</streamingModule>
 </experiment>

@@ -344,7 +344,9 @@ public class CoolStreamingPlusOverlay extends MultipleTreeOverlayModule<partnerI
     //
     else if (message instanceof PartnershipDropping) {
       final PartnershipDropping msg = (PartnershipDropping) message;
-      descriptorToSons.get(msg.substream).remove(msg.sourceId);
+      if (descriptorToSons.containsKey(msg.substream)) {
+        descriptorToSons.get(msg.substream).remove(msg.sourceId);
+      }
     }
   }
   

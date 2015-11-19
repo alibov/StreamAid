@@ -1,8 +1,7 @@
 <experiment>
 	<name value="CsAraneola"/>
-	<playbackSeconds value="300" />
+	<playbackSeconds value="30" />
 	<runs value="1" />
-	<streamWindowSize value="120" />
 	<uploadBandwidthDistribution>
 		<distribution type="ConstantDistribution" value="5560000.0"/>
 	</uploadBandwidthDistribution>
@@ -13,13 +12,15 @@
 				variance="1.28" />
 		</sessionLengthDistribution>
 	</churnModel> 
-	<waitIfNoChunk />
-	<startupBuffering value="1000"/>
+	<playerModule waitIfNoChunk="" bufferFromFirstChunk="true"
+	serverStartup="10000" startupBuffering="1000" streamWindowSize="120" />
+	
+	
 	<bitrate value="300000" />
 	<seed value="123456" />
-	<streamingAlgorithm algorithm="CoolStreaming" size = "300">
-		    <overlayAlgorithm algorithm="AraneolaOverlay" S="12" gossipDelay="6" 
+	<streamingModule algorithm="CoolStreaming" size = "300">
+		    <overlayModule algorithm="Araneola" S="12" gossipDelay="6" 
 		        amountToSend="3" L="4" H="10" connect_timeout="2" disconnect_timeout="2"/>
-	    <behavior name="AdaptiveAdaptivePlayoutBehavior" bufferSize="2" maxSpeedChange="0.1" initRounds="5" alpha="0.5"/>
-	</streamingAlgorithm>
+	    <ingredient name="AdaptiveAdaptivePlayoutIngredient" bufferSize="2" maxSpeedChange="0.1" initRounds="5" alpha="0.5"/>
+	</streamingModule>
 </experiment>

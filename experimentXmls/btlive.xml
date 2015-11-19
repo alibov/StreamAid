@@ -1,6 +1,6 @@
 <experiment>
 	<name value="btlive" />
-	<playbackSeconds value="60" />
+	<playbackSeconds value="30" />
 	<runs value="1" />
 	<serverUploadBandwidth value="1668000000000" />
 	<messageHeaderSize value="64" />

@@ -1,7 +1,7 @@
 <experiment>
 	<name value="csNew" />
-	<playbackSeconds value="300" />
-	<runs value="5" />
+	<playbackSeconds value="30" />
+	<runs value="1" />
 	<!-- <churnModel type="none" /> -->
 	<!-- <churnModel type="sessionLengthInterArrival"> <sessionLengthDistribution> 
 		<distribution type="LogNormalDistribution" mean="4.29" variance="1.28" /> 
@@ -24,18 +24,18 @@
 	<!-- <churnModel type="eventBased"> <event type="addition" time="10" amount="20"/> 
 		<event type="departure" time="35" amount="25"/> <event type="addition" time="40" 
 		amount="20"/> </churnModel> -->
-	<bufferFromFirstChunk />
-	<serverStartup value="10000" />
-
+	
+	
+	<playerModule waitIfNoChunk="" bufferFromFirstChunk="true"
+	serverStartup="10000" startupBuffering="2000" streamWindowSize="120" /> 
 	<messageHeaderSize value="64" />
 	<seed value="12345678" />
 	<descriptions value="1" />
 	<cycleLength value="1000" />
 	<framework value="PeerSimFramework" />
-	<streamWindowSize value="120" />
 	<bitrate value="500000" /> <!-- 500 kbps -->
-	<streamingAlgorithm algorithm="CoolStreaming" size="100">
-		<overlayAlgorithm wl="4" groupSize="8" minCapacity="1" minUploadBandwidth="5560000"
-			algorithm="SwapLinksOverlay"/>
-	</streamingAlgorithm>
+	<streamingModule algorithm="CoolStreaming" size="100">
+		<overlayModule wl="4" groupSize="8" minCapacity="1" minUploadBandwidth="5560000"
+			algorithm="SwapLinks"/>
+	</streamingModule>
 </experiment>

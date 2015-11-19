@@ -1,6 +1,6 @@
 <experiment>
 	<name value="chainsawNew" />
-	<playbackSeconds value="300" />
+	<playbackSeconds value="30" />
 	<runs value="1" />
 	<!-- <churnModel type="none" /> -->
 <!-- 	<churnModel type="sessionLengthInterArrival">
@@ -38,16 +38,18 @@
 	    <event type="departure" time="35" amount="25"/>
 	    <event type="addition" time="40" amount="20"/>
 	</churnModel>-->
-	<serverStartup value="10000" />
+	
+	<playerModule waitIfNoChunk="" bufferFromFirstChunk="true"
+	serverStartup="10000" startupBuffering="2000" streamWindowSize="120" />
 	
 	<messageHeaderSize value="64" />
 	<seed value="12345678" />
 	<descriptions value="1" />
 	<cycleLength value="1000" />
 	<framework value="PeerSimFramework" dropRate="0.0" />
-	<streamWindowSize value="120" />
+	
 	<bitrate value="500000" /> <!-- 500 kbps -->
-	<streamingAlgorithm algorithm="Chainsaw" size="300">
-		<overlayAlgorithm groupSize="4" algorithm="RandomMinSizeGroupOverlayAlgorithm" />
-	</streamingAlgorithm>
+	<streamingModule algorithm="Chainsaw" size="300">
+		<overlayModule groupSize="4" algorithm="RandomMinSizeGroupOverlay" />
+	</streamingModule>
 </experiment>

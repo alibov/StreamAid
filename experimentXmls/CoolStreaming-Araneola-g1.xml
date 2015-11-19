@@ -1,7 +1,7 @@
 <experiment>
 	<name value="OmissionExperiments"/>
-	<playbackSeconds value="600"/>
-	<runs value="3"/>
+	<playbackSeconds value="30"/>
+	<runs value="1"/>
 	<uploadBandwidthDistribution>
 		<distribution type="ConstantDistribution" value="5560000.0"/>
 	</uploadBandwidthDistribution>
@@ -10,17 +10,14 @@
 	<seed value="12345678"/>
 	<descriptions value="1"/>
 	<cycleLength value="1000"/>
-	<churnModel type="none">
-	</churnModel>
-	<skipIfNoChunk />
-	<startupBuffering value="5000"/>
-	<serverStartup value="10000"/>
-	<streamWindowSize value="120"/>
+	<churnModel type="none" />
+	
+	<playerModule bufferFromFirstChunk="true"
+	serverStartup="10000" startupBuffering="5000" streamWindowSize="120" />
+	
 	<framework value="PeerSimFramework" dropRate="0.001" minDelay="200" maxDelay="400" />
 	<bitrate value="300000"/> <!-- 300 kbps --> 
-	<streamingAlgorithm algorithm="CoolStreaming" size="150">
- 		<overlayAlgorithm H="10" L="4" S="12" algorithm="AraneolaOverlay" amountToSend="3" connect_timeout="2" disconnect_timeout="2" gossipDelay="6">
-			<clusteringAlgorithm algorithm="FullCluster"/>
-		</overlayAlgorithm>
-	</streamingAlgorithm>
+	<streamingModule algorithm="CoolStreaming" size="150">
+ 		<overlayModule H="10" L="4" S="12" algorithm="Araneola" amountToSend="3" connect_timeout="2" disconnect_timeout="2" gossipDelay="6" />
+	</streamingModule>
 </experiment>

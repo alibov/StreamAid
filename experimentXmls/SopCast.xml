@@ -1,23 +1,22 @@
 <experiment>
 	<name value="expName" />
 	<runs value="1" />
-	<streamWindowSize value="120" />
+	<playerModule waitIfNoChunk="" bufferFromFirstChunk="true"
+	serverStartup="10000" startupBuffering="2000" streamWindowSize="120" /> 
 	<bitrate value="250000" /> <!-- 250 kbps -->
 	<churnModel type="availabilityFile">
-		<availabilityFile value="sopcast.avail" />
+		<availabilityFile value="experimentXmls/sopcastSmall.avail" />
 	</churnModel>
 	<seed value="123456" />
-	<streamingAlgorithm algorithm="MtreeBone">
-		<streamingAlgorithm algorithm="PushTree">
-			<overlayAlgorithm algorithm="TreeBoneOverlay"
-				stableCoefficient="0.3" queryTimeout="3">
-				<clusteringAlgorithm algorithm="FullCluster" />
-			</overlayAlgorithm>
-		</streamingAlgorithm>
-		<overlayAlgorithm algorithm="AraneolaOverlay" S="12"
-			gossipDelay="6" amountToSend="3" L="3" H="10" connect_timeout="2"
-			disconnect_timeout="2">
-			<clusteringAlgorithm algorithm="FullCluster" />
-		</overlayAlgorithm>
-	</streamingAlgorithm>
+	<streamingModule algorithm="PushPull">
+		<overlayModule algorithm="TreeBone"
+			stableCoefficient="0.3" queryTimeout="3" freeSlots="1"/>
+		
+		<streamingModule algorithm="CoolStreaming"
+			maxInitOffset="0" maxInitLatency="100" sourcePush="false">
+			<overlayModule H="10" L="4" S="12" algorithm="Araneola"
+				amountToSend="3" connect_timeout="2" disconnect_timeout="2"
+				gossipDelay="6" />
+		</streamingModule>
+	</streamingModule>
 </experiment>

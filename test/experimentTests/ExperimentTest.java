@@ -1,14 +1,7 @@
 package experimentTests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 import logging.ObjectLogger;
 import logging.TextLogger;
@@ -26,10 +19,8 @@ import utils.distributions.ConstantDistribution;
 import experiment.Experiment;
 import experiment.ExperimentConfiguration;
 import experiment.ExperimentConfigurationCreator;
-import experiment.logAnalyzer.NodeInfo;
 
 public class ExperimentTest {
-  public final static List<String> confFiles = new LinkedList<String>();
   public final static String expNameString = "testName";
   public final static int testSize = 20;
   
@@ -42,17 +33,12 @@ public class ExperimentTest {
     ExperimentConfiguration.setDefaultPlaybackSeconds(40);
     ExperimentConfiguration.setDefaultRuns(2);
     ExperimentConfiguration.setDefaultUploadBandwidthDistribution(new ConstantDistribution(5560000));
-    confFiles.add("coolstreaming.xml");
-    confFiles.add("coolstreamingAraneola.xml");
-    confFiles.add("coolstreamingPrime.xml");
-    confFiles.add("coolstreamingSCAMP.xml");
-    confFiles.add("file.xml");
-    confFiles.add("Prime.xml");
-    confFiles.add("SopCast.xml");
   }
   
   @AfterClass public static void tearDownAfterClass() throws Exception {
-    Utils.deleteRecursive(new File("testName"));
+    if (new File(expNameString).exists()) {
+      Utils.deleteRecursive(new File(expNameString));
+    }
   }
   
   @Before public void setUp() throws Exception {
@@ -71,53 +57,29 @@ public class ExperimentTest {
   @Test public void CoolStreamingSCAMPTest() throws Exception {
     final ExperimentConfiguration expc = new ExperimentConfiguration(
         ExperimentConfigurationCreator.getCoolstreamingSCAMPXML(testSize));
-    testConfiguration(expc);
+    TestUtils.testConfiguration(expc);
   }
   
   @Test public void CoolStreamingAraneolaTest() throws Exception {
     final ExperimentConfiguration expc = new ExperimentConfiguration(
         ExperimentConfigurationCreator.getCoolstreamingAraneolaXML(testSize));
-    testConfiguration(expc);
+    TestUtils.testConfiguration(expc);
   }
   
   @Test public void CoolStreamingPrimeTest() throws Exception {
     final ExperimentConfiguration expc = new ExperimentConfiguration(ExperimentConfigurationCreator.getCoolstreamingXML(
         ExperimentConfigurationCreator.getPrimeOverlayXML(6), testSize));
-    testConfiguration(expc);
+    TestUtils.testConfiguration(expc);
   }
   
   @Test public void mTreeBoneAraneolaTest() throws Exception {
     final ExperimentConfiguration expc = new ExperimentConfiguration(
-        ExperimentConfigurationCreator.getMtreeboneAraneolaXML(testSize));
-    testConfiguration(expc);
+        ExperimentConfigurationCreator.getPushPullAraneolaXML(testSize));
+    TestUtils.testConfiguration(expc);
   }
   
   @Test public void mTreeBoneSCAMPTest() throws Exception {
-    final ExperimentConfiguration expc = new ExperimentConfiguration(ExperimentConfigurationCreator.getMtreeboneSCAMPXML(testSize));
-    testConfiguration(expc);
-  }
-  
-  @Test public void ConfigurationFilesTest() throws Exception {
-    for (final String filename : confFiles) {
-      System.out.println("testing configuration file: " + filename);
-      final ExperimentConfiguration expc = new ExperimentConfiguration(new File(filename));
-      final ExperimentConfiguration expc2 = new ExperimentConfiguration(expc.toXml());
-      assertEquals(expc.toXml(), expc2.toXml());
-      assertEquals(expc, expc2);
-    }
-  }
-  
-  private static void testConfiguration(final ExperimentConfiguration expc) throws IOException, Exception {
-    Experiment.runConfiguration(expc);
-    assertTrue(Experiment.results.maxOrder > 0);
-    final Map<String, NodeInfo> nodeInfo = Experiment.results.getNodeInfo();
-    for (final NodeInfo ni : nodeInfo.values()) {
-      assertTrue(ni.bytesSent > 0);
-      assertTrue(ni.messagesSent > 0);
-      if (ni.chunkInfo.isEmpty()) {
-        assertTrue(ni.leaveTime - ni.joinTime < 20000);
-      }
-    }
-    assertEquals(1.0, Experiment.results.getCI(), 0.0001);
+    final ExperimentConfiguration expc = new ExperimentConfiguration(ExperimentConfigurationCreator.getPushPullSCAMPXML(testSize));
+    TestUtils.testConfiguration(expc);
   }
 }

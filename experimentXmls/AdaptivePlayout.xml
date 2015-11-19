@@ -1,6 +1,6 @@
 <experiment>
 	<name value="AdaptivePlayout"/>
-	<playbackSeconds value="300"/>
+	<playbackSeconds value="30"/>
 	<runs value="1"/>
 	<uploadBandwidthDistribution>
 		<distribution type="ConstantDistribution" value="5560000.0"/>
@@ -16,20 +16,19 @@
 				variance="1.28" />
 		</sessionLengthDistribution>
 	</churnModel> 
-<!-- 	<skipIfNoChunk /> -->
-	<bufferFromFirstChunk />
-	<startupBuffering value="3000"/>
-	<serverStartup value="10000"/>
-	<streamWindowSize value="120"/>
+
+  	<playerModule waitIfNoChunk="" bufferFromFirstChunk="true"
+		serverStartup="10000" startupBuffering="3000" streamWindowSize="120" />  
+
 	<framework value="PeerSimFramework" dropRate="0.0" minDelay="200" maxDelay="400"  />
 	<bitrate value="900000"/> <!-- 300 kbps -->
-	<streamingAlgorithm algorithm="PushPullAlgorithm" size="100"> 
-		<streamingAlgorithm algorithm="CoolStreaming" serverPush="false">
-		 	<overlayAlgorithm H="10" L="4" S="12" algorithm="AraneolaOverlay" amountToSend="3" connect_timeout="2" disconnect_timeout="2" gossipDelay="6"/>
-		  	<behavior name="ConstantBufferSizeAdaptivePlayoutBehavior" bufferSize="3" maxSpeedChange="0.1"/>  
-		</streamingAlgorithm>
-		<overlayAlgorithm algorithm="TreeBoneOverlay"
+	<streamingModule algorithm="PushPull" size="100"> 
+		<streamingModule algorithm="CoolStreaming" serverPush="false">
+		 	<overlayModule H="10" L="4" S="12" algorithm="Araneola" amountToSend="3" connect_timeout="2" disconnect_timeout="2" gossipDelay="6"/>
+		  	<ingredient name="ConstantBufferSizeAdaptivePlayoutIngredient" bufferSize="3" maxSpeedChange="0.1"/>  
+		</streamingModule>
+		<overlayModule algorithm="TreeBone"
 				stableCoefficient="0.3" queryTimeout="3" freeSlots="1"/>
 
-	</streamingAlgorithm>
+	</streamingModule>
 </experiment>

@@ -1,6 +1,6 @@
 <experiment>
 	<name value="csNew" />
-	<playbackSeconds value="300" />
+	<playbackSeconds value="30" />
 	 <!-- <debugSeed value = "3837292283627714042"></debugSeed>--> 
 	<runs value="1" />
 	<!-- <churnModel type="none" /> -->
@@ -31,22 +31,23 @@
 	</uploadBandwidthDistribution>
 	<serverUploadBandwidth value="16680000" />
 	
-	<bufferFromFirstChunk />
-	<serverStartup value="10000" />
-    <startupBuffering value="1000"/>
+	
+	<playerModule waitIfNoChunk="" bufferFromFirstChunk="true"
+	serverStartup="10000" startupBuffering="1000" streamWindowSize="120" />
+	   
     
 	<messageHeaderSize value="64" />
 	<seed value="12345678" />
 	<descriptions value="3" />
 	<cycleLength value="1000" />
 	<framework value="PeerSimFramework" />
-	<streamWindowSize value="120" />
+	
 	<bitrate value="500000" /> <!-- 500 kbps -->
-	<streamingAlgorithm algorithm="PushMultipleDescriptionTree" size="100">
-		<overlayAlgorithm algorithm="ChunkySpread" maxLoad="11" churnDelay="4" startDelay="5" ULT="0.75" LLT="0.25" 
+	<streamingModule algorithm="PushMultipleDescriptionTree" size="100">
+		<overlayModule algorithm="ChunkySpread" maxLoad="11" churnDelay="4" startDelay="5" ULT="0.75" LLT="0.25" 
 		windowSize="10" fastPercentage="0.4" slowPercentage="0.4" highScore="6" lowScore="-6" noParentTimeout="1" pendingTimeout="2">
-			<overlayAlgorithm wl="6" groupSize="40" minCapacity="60" minUploadBandwidth="5560000"
-			algorithm="SwapLinksOverlay"/>
-			</overlayAlgorithm>
-	</streamingAlgorithm>
+			<overlayModule wl="6" groupSize="40" minCapacity="60" minUploadBandwidth="5560000"
+			algorithm="SwapLinks"/>
+			</overlayModule>
+	</streamingModule>
 </experiment>

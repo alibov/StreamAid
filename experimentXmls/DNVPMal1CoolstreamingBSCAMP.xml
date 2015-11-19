@@ -1,6 +1,6 @@
 <experiment>
 	<name value="DNVPMal1CoolstreamingBSCAMP" />
-	<playbackSeconds value="300" />
+	<playbackSeconds value="30" />
 	<runs value="1" />
 	<!-- <churnModel type="sessionLengthAddOnFailure">
 		<sessionLengthDistribution>
@@ -17,24 +17,24 @@
 			<distribution type="ParetoDistribution" Xm="1.55" alpha="2.52" />
 		</interArrivalDistribution>
 	</churnModel>-->
-	<streamWindowSize value="120" />
+	<playerModule waitIfNoChunk="" bufferFromFirstChunk="true"
+	serverStartup="10000" startupBuffering="2000" streamWindowSize="120" />
+	
 	<bitrate value="300000" />
 	<seed value="123456" />
-	<streamingAlgorithm algorithm="CoolStreaming" size="300">
-		<overlayAlgorithm algorithm="BSCAMPOverlay" c="1">
-			<clusteringAlgorithm algorithm="FullCluster" />
-			<behavior name="DNVPOverlayBehavior" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
+	<streamingModule algorithm="CoolStreaming" size="300">
+		<overlayModule algorithm="BSCAMP" c="1">
+			<ingredient name="DNVPOverlayIngredient" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
 			checkApproval="1.0" checkDisconnection="1.0" verificationsPerCycle = "2"/>
-		</overlayAlgorithm>
-	</streamingAlgorithm>
-	<streamingAlgorithm algorithm="CoolStreaming" size="100">
-		<overlayAlgorithm algorithm="BSCAMPOverlay" c="1">
-			<clusteringAlgorithm algorithm="FullCluster" />
-			<!-- <behavior name="Malicious1DNVPBehavior" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
+		</overlayModule>
+	</streamingModule>
+	<streamingModule algorithm="CoolStreaming" size="100">
+		<overlayModule algorithm="BSCAMP" c="1">
+			<!-- <ingredient name="Malicious1DNVPIngredient" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
 			checkApproval="1.0" checkDisconnection="1.0"/> -->
-			<behavior name="DNVPOverlayBehavior" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
+			<ingredient name="DNVPOverlayIngredient" timeoutcycle="5" expirationInterval="20" numOfNoncesToProduce="20"
 			checkApproval="1.0" checkDisconnection="1.0" verificationsPerCycle = "2"/>
-		</overlayAlgorithm>
-		<behavior name="OmissionAttackBehavior"/> 
-	</streamingAlgorithm>
+		</overlayModule>
+<!-- 		<ingredient name="OmissionAttackIngredient"/> --> 
+	</streamingModule>
 </experiment>

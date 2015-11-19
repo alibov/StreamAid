@@ -1,7 +1,7 @@
 <experiment>
 	<name value="coolstreamingIngredients" />
 	<seed value="12345678" />
-	<playbackSeconds value="60" />
+	<playbackSeconds value="30" />
 	<runs value="1" />
 	<serverUploadBandwidth value="10000000" />
 	<enableTextLogger/>

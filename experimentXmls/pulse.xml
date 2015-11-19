@@ -1,6 +1,6 @@
 <experiment>
 	<name value="pulse" />
-	<playbackSeconds value="300" />
+	<playbackSeconds value="30" />
 	<runs value="1" />
 	
 	<messageHeaderSize value="64" />
@@ -10,7 +10,7 @@
 	<framework value="PeerSimFramework" dropRate="0.00" />
 	<bitrate value="500000" /> <!-- 500 kbps -->
 	
-	<playerModule waitIfNoChunk="true" bufferFromFirstChunk="true"
+	<playerModule waitIfNoChunk=""
 		serverStartup="10000" startupBuffering="1000" streamWindowSize="120" />
 		
 	<streamingModule algorithm="Pulse" reqLimit="4" size="300">
